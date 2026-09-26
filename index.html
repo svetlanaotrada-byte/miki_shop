@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>miki shop — маркетплейс, где товары выставляют пользователи</title>
+<meta name="description" content="miki shop — маркетплейс, на котором товары выставляют сами пользователи: выложите свой товар, найдите нужный и оформите покупку.">
+<link rel="icon" href="assets/favicon.svg">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#catalog">Перейти к каталогу</a>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__top">
+    <a class="logo" href="#" aria-label="miki shop — на главную">
+      <span class="logo__mark">m</span>
+      <span class="logo__text">miki <b>shop</b></span>
+    </a>
+
+    <form class="search" id="searchForm" role="search" autocomplete="off">
+      <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-3.5-3.5"></path>
+      </svg>
+      <input class="search__input" id="searchInput" type="search"
+             placeholder="Поиск товаров, например «наушники»…" aria-label="Поиск товаров">
+      <button class="search__clear" id="searchClear" type="button" aria-label="Очистить поиск" hidden>&times;</button>
+    </form>
+
+    <div class="header__actions">
+      <button class="hdr-btn hdr-btn--sell" id="sellOpen" type="button">
+        <span class="hdr-btn__ico" aria-hidden="true">+</span>
+        <span class="hdr-btn__label">Продать товар</span>
+      </button>
+
+      <button class="hdr-btn" id="mineOpen" type="button">
+        <span class="hdr-btn__ico" aria-hidden="true">📦</span>
+        <span class="hdr-btn__label">Мои товары</span>
+        <span class="badge" id="mineCount" data-empty="true">0</span>
+      </button>
+
+      <button class="cart-btn" id="cartOpen" type="button" aria-haspopup="dialog">
+        <span class="cart-btn__label">Корзина</span>
+        <span class="cart-btn__icon" aria-hidden="true">🛒</span>
+        <span class="cart-btn__count" id="cartCount" data-empty="true">0</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="cats" id="catsNav" aria-label="Категории товаров">
+    <div class="container cats__row" id="catsRow"></div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <span class="hero__badge">Товары от пользователей · Продавец и покупатель — это вы</span>
+      <h1>Каталог, который <span>наполняете вы</span></h1>
+      <p>Здесь нет заранее добавленных товаров. Любой товар на витрине выставил
+        человек — как и вы можете выставить свой: фото, название, описание, цена,
+        категория и состояние.</p>
+      <div class="hero__stats">
+        <div class="hero__stat"><b id="heroCount">0</b><span>товаров выставлено</span></div>
+        <div class="hero__stat"><b id="heroSellers">0</b><span>продавцов</span></div>
+        <div class="hero__stat"><b id="heroMine">0</b><span>ваших товаров</span></div>
+      </div>
+    </div>
+    <div class="hero__card hero__card--cta">
+      <div class="hero__cta">
+        <span class="hero__cta-ico" aria-hidden="true">🏷️</span>
+        <b>Есть что предложить?</b>
+        <span>Сделайте фото, укажите цену — и товар сразу появится в общем каталоге.</span>
+        <button class="btn btn--primary" id="heroSell" type="button">Выставить товар</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CATALOG ================= -->
+<main class="container catalog" id="catalog">
+  <div class="toolbar">
+    <div class="toolbar__left">
+      <h2 class="toolbar__title" id="catalogTitle">Все товары</h2>
+      <span class="toolbar__count" id="resultCount">0 товаров</span>
+    </div>
+    <div class="toolbar__right">
+      <label class="field">
+        <span class="field__label">Сортировка</span>
+        <select id="sortSelect" class="field__select">
+          <option value="new">сначала новые</option>
+          <option value="price-asc">сначала дешёвые</option>
+          <option value="price-desc">сначала дорогие</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <!-- Состояние пустого каталога и пустой выдачи задаётся из js/app.js -->
+  <div class="empty" id="emptyState" hidden>
+    <div class="empty__icon" id="emptyIcon">📦</div>
+    <h3 id="emptyTitle">Каталог пока пуст</h3>
+    <p id="emptyText">Ни один товар ещё не выставлен. Станьте первым продавцом — ваш товар сразу появится в общем каталоге.</p>
+    <button class="btn btn--primary" id="resetFilters" type="button">Сбросить фильтры</button>
+    <button class="btn btn--primary" id="emptySell" type="button" hidden>Выставить товар</button>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo__mark">m</span>
+      <div>
+        <b>miki shop</b>
+        <p>Маркетплейс, где товары выставляют сами пользователи. Данные хранятся в вашем браузере.</p>
+      </div>
+    </div>
+    <nav class="footer__links">
+      <a href="#catalog">Каталог</a>
+      <a href="#" data-action="categories">Категории</a>
+      <a href="#" data-action="mine">Мои товары</a>
+      <a href="#" data-action="about">О магазине</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="overlay" id="overlay" hidden></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Корзина" hidden>
+  <header class="drawer__head">
+    <h2>Корзина <span class="drawer__count" id="drawerCount">0</span></h2>
+    <button class="icon-btn" id="cartClose" type="button" aria-label="Закрыть корзину">&times;</button>
+  </header>
+
+  <div class="drawer__body" id="drawerBody"></div>
+
+  <footer class="drawer__foot" id="drawerFoot">
+    <div class="drawer__row">
+      <span>Товаров: <b id="footQty">0</b></span>
+      <span>Продавцов: <b id="footSellers">0</b></span>
+    </div>
+    <div class="drawer__total">
+      <span>Итого</span>
+      <b id="footTotal">0 ₽</b>
+    </div>
+    <button class="btn btn--checkout" id="checkout" type="button">
+      Оформить покупку
+      <span id="checkoutTotal">0 ₽</span>
+    </button>
+    <button class="btn btn--ghost btn--sm" id="clearCart" type="button">Очистить корзину</button>
+  </footer>
+</aside>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal__box">
+    <div class="modal__check" aria-hidden="true">
+      <svg viewBox="0 0 52 52"><path d="M14 27l9 9 16-18"></path></svg>
+    </div>
+    <h2 id="modalTitle">Заказ успешно оформлен!</h2>
+    <p class="modal__text">Спасибо за покупку в <b>miki shop</b>. Продавцы увидят заказ и свяжутся с вами, чтобы передать товар.</p>
+    <div class="modal__order">
+      <span>Номер заказа:</span>
+      <b id="orderNumber"></b>
+      <button class="copy-btn" id="copyOrder" type="button" title="Скопировать номер">Скопировать</button>
+    </div>
+    <div class="modal__items" id="modalItems"></div>
+    <button class="btn btn--primary" id="modalClose" type="button">Продолжить покупки</button>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<!-- ================= MY ITEMS DRAWER ================= -->
+<aside class="drawer drawer--wide" id="myDrawer" role="dialog" aria-modal="true" aria-label="Мои товары" hidden>
+  <header class="drawer__head">
+    <h2>Мои товары <span class="drawer__count" id="myCount">0</span></h2>
+    <button class="icon-btn" id="myClose" type="button" aria-label="Закрыть">&times;</button>
+  </header>
+
+  <div class="drawer__body" id="myBody"></div>
+
+  <footer class="drawer__foot">
+    <p class="mine__profile">Вы продаёте как <b id="myName">Продавец</b></p>
+    <p class="mine__hint">Товары хранятся в этом браузере и остаются на витрине после перезагрузки страницы. Покупать и продавать можно одновременно.</p>
+    <button class="btn btn--primary" id="mySellBtn" type="button">
+      <span aria-hidden="true">+</span> Продать товар
+    </button>
+  </footer>
+</aside>
+
+<!-- ================= PRODUCT CARD MODAL ================= -->
+<div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="pmName" hidden>
+  <div class="modal__box modal__box--wide">
+    <button class="icon-btn modal__x" id="pmClose" type="button" aria-label="Закрыть карточку">&times;</button>
+    <div class="detail">
+      <div class="detail__media">
+        <img id="pmImage" alt="" width="400" height="400">
+        <span class="detail__cond" id="pmCondition"></span>
+      </div>
+        <div class="detail__info">
+          <span class="card__cat" id="pmCategory"></span>
+          <h2 id="pmName"></h2>
+          <div class="detail__meta" id="pmMeta"></div>
+          <div class="detail__seller" id="pmSeller"></div>
+        <p class="detail__desc" id="pmDesc"></p>
+        <div class="detail__buy">
+          <span class="price" id="pmPrice"></span>
+          <button class="btn btn--primary detail__add" id="pmAdd" type="button">Добавить в корзину</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SELL FORM MODAL ================= -->
+<div class="modal" id="sellModal" role="dialog" aria-modal="true" aria-labelledby="sellTitle" hidden>
+  <div class="modal__box modal__box--form">
+    <button class="icon-btn modal__x" id="sellClose" type="button" aria-label="Закрыть форму">&times;</button>
+    <h2 id="sellTitle">Выставить товар</h2>
+    <p class="modal__text">Заполните карточку — товар сразу появится в общем каталоге и его увидят покупатели.</p>
+
+    <form class="form" id="sellForm" novalidate>
+      <!-- Фото -->
+      <div class="form__row">
+        <span class="form__label">Фото товара</span>
+        <div class="photo">
+          <div class="photo__preview" id="sellPhotoPreview">
+            <span class="photo__hint">Нет фото</span>
+          </div>
+          <div class="photo__side">
+            <label class="btn btn--ghost btn--sm photo__pick" for="sellPhoto">Выбрать фото</label>
+            <input class="visually-hidden" id="sellPhoto" type="file" accept="image/*">
+            <button class="btn btn--ghost btn--sm" id="sellPhotoClear" type="button" hidden>Убрать фото</button>
+            <small class="photo__note">JPG или PNG, до 5 МБ. Если фото нет — поставим заглушку.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Название -->
+      <div class="form__row">
+        <label class="form__label" for="sellName">Название товара <b>*</b></label>
+        <input class="form__input" id="sellName" type="text" maxlength="70"
+               placeholder="Например: Кофемашина Delonghi Magnifica" required>
+        <small class="form__error" data-error="sellName"></small>
+      </div>
+
+      <!-- Категория + состояние -->
+      <div class="form__grid">
+        <div class="form__row">
+          <label class="form__label" for="sellCategory">Категория <b>*</b></label>
+          <select class="form__input" id="sellCategory" required></select>
+        </div>
+        <div class="form__row">
+          <label class="form__label" for="sellCondition">Состояние товара <b>*</b></label>
+          <select class="form__input" id="sellCondition" required></select>
+        </div>
+      </div>
+
+      <!-- Цена -->
+      <div class="form__row">
+        <label class="form__label" for="sellPrice">Цена, ₽ <b>*</b></label>
+        <input class="form__input" id="sellPrice" type="number" min="1" step="1" inputmode="numeric"
+               placeholder="2500" required>
+        <small class="form__error" data-error="sellPrice"></small>
+      </div>
+
+      <!-- Описание -->
+      <div class="form__row">
+        <label class="form__label" for="sellDesc">Описание</label>
+        <textarea class="form__input form__input--area" id="sellDesc" rows="4" maxlength="800"
+                  placeholder="Состояние, комплектация, причина продажи, город и способ передачи…"></textarea>
+        <small class="form__counter"><span id="sellDescCount">0</span> / 800</small>
+      </div>
+
+      <!-- Продавец -->
+      <div class="form__row">
+        <label class="form__label" for="sellSeller">Имя продавца <b>*</b></label>
+        <input class="form__input" id="sellSeller" type="text" maxlength="40"
+               placeholder="Как вас показывать покупателям" required>
+        <small class="form__error" data-error="sellSeller"></small>
+        <small class="photo__note">Это имя увидят покупатели. Оно запоминается и подставляется в следующих товарах.</small>
+      </div>
+
+      <p class="form__error form__error--global" id="sellError" hidden></p>
+
+      <div class="form__actions">
+        <button class="btn btn--ghost" id="sellCancel" type="button">Отмена</button>
+        <button class="btn btn--primary" id="sellSubmit" type="submit">Опубликовать</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
