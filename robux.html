@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Купить Robux — miki shop</title>
+  <meta name="description" content="Раздел покупки Robux в маркетплейсе: пакеты Robux, оплата только через официальный roblox.com и история покупок.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-robux">
+
+<header class="header">
+  <div class="container header__top">
+    <a class="logo" href="index.html" aria-label="miki shop — в маркетплейс">
+      <span class="logo__mark">m</span>
+      <span class="logo__text">miki <b>shop</b></span>
+    </a>
+    <div class="header__actions">
+      <a class="hdr-btn hdr-btn--back" href="index.html">
+        <span class="hdr-btn__ico" aria-hidden="true">←</span>
+        <span class="hdr-btn__label">Вернуться в маркетплейс</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container rbx">
+
+  <!-- ================= HERO ================= -->
+  <section class="rbx-hero">
+    <span class="rbx-hero__badge">Официальная оплата на roblox.com</span>
+    <h1 class="rbx-hero__title">🎮 Купить Robux</h1>
+    <p class="rbx-hero__lead">
+      Выберите пакет, укажите свой Roblox Username и оплатите на официальном сайте Roblox.
+      Покупка и зачисление Robux выполняются через официальные сервисы Roblox.
+    </p>
+
+    <div class="rbx-hero__stats">
+      <div class="rbx-stat">
+        <b id="rbxName">—</b>
+        <span>Roblox Username</span>
+      </div>
+      <div class="rbx-stat">
+        <b>Robux: —</b>
+        <span>баланс не отображается</span>
+      </div>
+      <div class="rbx-stat">
+        <b id="rbxMine">0</b>
+        <span>ваших товаров на витрине</span>
+      </div>
+      <div class="rbx-stat">
+        <b id="rbxPending">0</b>
+        <span>заказов ждут подтверждения</span>
+      </div>
+    </div>
+
+    <p class="rbx-hero__profile">
+      <a class="rbx-hero__link" id="rbxProfile" href="https://www.roblox.com/" target="_blank" rel="noopener noreferrer">Открыть профиль в Roblox →</a>
+    </p>
+  </section>
+
+  <!-- ================= ПАКЕТЫ ================= -->
+  <section class="rbx-section" aria-labelledby="rbxPackTitle">
+    <div class="rbx-section__head">
+      <h2 id="rbxPackTitle">Пакеты Robux</h2>
+      <p>Кнопка «Купить» открывает оформление: Roblox Username, выбранный пакет с ценой и кнопка «Оплатить».</p>
+    </div>
+    <div class="rbx-grid" id="rbxGrid"></div>
+  </section>
+
+  <!-- ================= КАК КУПИТЬ ================= -->
+  <section class="rbx-section" aria-labelledby="rbxHowTitle">
+    <div class="rbx-section__head">
+      <h2 id="rbxHowTitle">Как купить</h2>
+    </div>
+    <ol class="rbx-steps">
+      <li class="rbx-step">
+        <span class="rbx-step__num">1</span>
+        <b>Выберите пакет</b>
+        <span>Нажмите «Купить» на карточке — количество Robux и цена в евро видны сразу.</span>
+      </li>
+      <li class="rbx-step">
+        <span class="rbx-step__num">2</span>
+        <b>Укажите Roblox Username</b>
+        <span>Проверим имя и покажем итог: пакет, цена и получатель Robux.</span>
+      </li>
+      <li class="rbx-step">
+        <span class="rbx-step__num">3</span>
+        <b>Оплатите на roblox.com</b>
+        <span>Кнопка «Оплатить» открывает официальный магазин Roblox — данные карты вводите только там.</span>
+      </li>
+    </ol>
+
+    <p class="rbx-note">
+      Покупка и зачисление Robux выполняются через официальные сервисы Roblox.
+      Мы не спрашиваем и не храним пароль Roblox, cookie, токены и коды 2FA, а зачисление Robux
+      отмечаем только после подтверждения от Roblox.
+    </p>
+  </section>
+
+  <!-- ================= МОИ ПОКУПКИ ================= -->
+  <section class="rbx-section" aria-labelledby="rbxHistoryTitle">
+    <div class="rbx-section__head">
+      <h2 id="rbxHistoryTitle">Мои покупки Robux</h2>
+      <p id="rbxOrdersCount">пока нет заказов</p>
+    </div>
+
+    <ul class="rbx-orders" id="rbxHistory" hidden></ul>
+
+    <div class="empty" id="rbxHistoryEmpty">
+      <b>История покупок пока пуста</b>
+      <p>Нажмите «Купить» на любом пакете — заказ появится здесь со статусом и номером.</p>
+    </div>
+
+    <p class="rbx-note rbx-note--soft">
+      Статус «Ожидает подтверждения» означает, что вы перешли на официальный roblox.com.
+      Пока Roblox не подтвердил оплату, покупка не считается оплаченной и Robux не начисляются.
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo__mark">m</span>
+      <div>
+        <b>miki shop</b>
+        <p>Маркетплейс, где товары выставляют сами пользователи. Данные хранятся в вашем браузере.</p>
+      </div>
+    </div>
+    <nav class="footer__links">
+      <a href="index.html">Каталог</a>
+      <a href="index.html#catalog">Категории</a>
+      <a href="index.html">Мои товары</a>
+      <a href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener noreferrer">Оплата Robux на roblox.com</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ================= ОКНО ПОКУПКИ ================= -->
+<div class="modal" id="rbxModal" hidden role="dialog" aria-modal="true" aria-labelledby="rbxModalTitle">
+  <div class="modal__box modal__box--form rbx-modal">
+    <button class="icon-btn modal__x" id="rbxModalClose" type="button" aria-label="Закрыть">×</button>
+
+    <h2 class="rbx-modal__title" id="rbxModalTitle">Покупка Robux</h2>
+    <ol class="rbx-steps-nav" id="rbxStepsNav">
+      <li class="is-active" data-step="1">Roblox Username</li>
+      <li data-step="2">Пакет и цена</li>
+      <li data-step="3">Оплата</li>
+    </ol>
+
+    <!-- Шаг 1: Roblox Username -->
+    <section class="rbx-pane" data-pane="1">
+      <p class="rbx-pane__lead">Кому адресовать пакет? Robux придёт на этот аккаунт Roblox.</p>
+      <label class="form__label" for="rbxModalUser">Roblox Username</label>
+      <input class="form__input" id="rbxModalUser" type="text" maxlength="20"
+             autocomplete="off" autocapitalize="off" spellcheck="false"
+             placeholder="Например: miki_player">
+      <small class="form__error" data-error="rbxModalUser"></small>
+      <button class="rbx-saved" id="rbxUseSaved" type="button" hidden></button>
+      <small class="photo__note">Только имя пользователя. Пароль, cookie, токены и коды 2FA мы не спрашиваем и не храним.</small>
+      <div class="form__actions">
+        <button class="btn btn--ghost" id="rbxCancel1" type="button">Отмена</button>
+        <button class="btn btn--primary" id="rbxStepOne" type="button">Далее</button>
+      </div>
+    </section>
+
+    <!-- Шаг 2: выбранный пакет и цена -->
+    <section class="rbx-pane" data-pane="2" hidden>
+      <p class="rbx-pane__lead">Проверьте пакет и стоимость перед оплатой.</p>
+      <div class="rbx-sum">
+        <div class="rbx-sum__row">
+          <span>Пакет</span>
+          <b><span id="sumAmount">—</span> <span id="sumTitle">Robux</span></b>
+        </div>
+        <div class="rbx-sum__row">
+          <span>Цена</span>
+          <b id="sumPrice">—</b>
+        </div>
+        <div class="rbx-sum__row">
+          <span>Roblox Username</span>
+          <b id="sumUser">—</b>
+        </div>
+      </div>
+      <p class="rbx-note rbx-note--soft">
+        Оплата пройдёт на официальном roblox.com. Данные карты вводите только на сайте Roblox.
+      </p>
+      <div class="form__actions">
+        <button class="btn btn--ghost" id="rbxBack" type="button">Назад</button>
+        <button class="btn btn--primary" id="rbxPay" type="button">Оплатить</button>
+      </div>
+    </section>
+
+    <!-- Шаг 3: заказ создан -->
+    <section class="rbx-pane" data-pane="3" hidden>
+      <p class="rbx-pane__lead">Заказ создан и ждёт подтверждения от Roblox.</p>
+      <div class="rbx-sum">
+        <div class="rbx-sum__row">
+          <span>Пакет</span>
+          <b id="okTitle">—</b>
+        </div>
+        <div class="rbx-sum__row">
+          <span>Цена</span>
+          <b id="okPrice">—</b>
+        </div>
+        <div class="rbx-sum__row">
+          <span>Получатель</span>
+          <b id="okUser">—</b>
+        </div>
+        <div class="rbx-sum__row">
+          <span>Номер заказа</span>
+          <b id="okRef">—</b>
+        </div>
+      </div>
+      <p class="rbx-note rbx-note--soft" id="okMessage">—</p>
+      <div class="form__actions">
+        <button class="btn btn--ghost" id="rbxDone" type="button">Готово</button>
+        <a class="btn btn--primary" id="okOpen" href="https://www.roblox.com/upgrades/robux" target="_blank" rel="noopener noreferrer">Перейти на roblox.com</a>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="js/robux-payment.js"></script>
+<script src="js/robux-shop.js"></script>
+</body>
+</html>
